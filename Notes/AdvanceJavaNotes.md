@@ -61,7 +61,7 @@ Server-based applications are applications that run in a **server environment**.
 ### Web Applications  
 - Constructed using **Advanced Java technologies** like **JDBC, Servlets, and JSP**.  
 - Typically follow a **3-tier architecture**.  
-- *(Diagram placeholder: Add an image here if needed.)*  
+- ![Screenshot](Diagram's/Dia-1.png)
 
 ### Enterprise Applications  
 - Executed in a **distributed environment**.  
