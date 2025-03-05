@@ -13,7 +13,13 @@
 5. [FAQ: Storage and Types of Storage](#faq-storage-and-types-of-storage)  
    - [Field Storage](#field-storage)  
    - [Object Storage](#object-storage)  
-
+6. [Example: Object and Object Reference](#example-object-and-object-reference)  
+7. [FAQ: Difference Between](#faq-difference-between)  
+   - [Object](#i-object)  
+   - [Object Reference](#ii-object-reference)  
+   - [Object Reference Variable](#iii-object-reference-variable)  
+8. [Important: List of Objects Generated from Core Java](#important-list-of-objects-generated-from-core-java)  
+9. [Note: Field and Object Storage in JVM](#note-field-and-object-storage-in-jvm)  
 ---
 
 ## Summary of Core Java  
@@ -91,5 +97,63 @@ Java applications categorize storage into four types:
 2. **Object Storage**  
    - Memory allocated to store **grouped values**.  
    - Created when using **non-primitive data types** (`Class`, `Interface`, `Array`, `Enum`).  
+
+---
+## Example: Object and Object Reference  
+
+```java
+class Addition {
+    static int a;
+    int b;
+
+    void add() {
+        int c = a + b;
+        System.out.println(c);
+    }
+}
+
+Addition ad = new Addition();
+ad.a = 12;
+ad.b = 13;
+ad.add();
+
+Addition ob2 = ad;
+```
+
+- ![Screenshot](Diagram's/Dia-2.png)
+
+---
+
+## FAQ: Difference Between  
+
+### (i) Object  
+- The **memory generated** to hold **instance members** of a class is known as an **Object**.  
+
+### (ii) Object Reference  
+- The **address location** where the object is created is known as the **Object Reference**.  
+
+### (iii) Object Reference Variable  
+- A **non-primitive data type variable** that holds an **object reference** is known as an **Object Reference Variable** (or Object Name).  
+
+---
+
+## Important: List of Objects Generated from Core Java  
+
+1. **User-Defined Class Objects**  
+2. **String Objects**  
+3. **Wrapper Class Objects**  
+4. **Array Objects**  
+5. **Collection<E> Objects**  
+6. **Map<K,V> Objects**  
+7. **Enum<E> Objects**  
+
+---
+
+## Note: Field and Object Storage in JVM  
+
+- **Field and Object Storage** generated as part of the **JVM during application execution** will be **automatically destroyed** when the JVM **shuts down**.  
+- If **permanent storage** is required for an application, it must use one of the following:  
+  - **File Storage**  
+  - **Database Storage**  
 
 ---
