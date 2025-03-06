@@ -32,7 +32,7 @@ Code-with-AdvanceJava/
 - Look into `Projects/` for applied learning and real-world examples.
 
 ---
-## [JDBC Application Setup Guide]()
+## [JDBC Application Setup Guide](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/JDBC_app_1/src/test)
 
 ### Step 1: Download and Install Database Product (Oracle)
 
