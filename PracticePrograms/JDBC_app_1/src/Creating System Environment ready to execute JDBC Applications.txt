@@ -1,0 +1,54 @@
+*imp
+Creating System Environment ready to execute JDBC Applications:
+step-1	: Download and Install Database Product(Oracle)
+
+step-2 	: Perform Login process to Database Product
+	DB UserName : system
+	DB Password : tiger
+step-3 	: Create table with name Customer72
+           	   (phno, cid, name, city, mid)   Primary Key : phno
+SQL> create table Customer72(
+ 	phno number(15),
+ 	cid varchar2(15),
+ 	name varchar2(15),
+ 	city varchar2(15),
+ 	mid varchar2(25),
+ 	primary key(phno)
+);
+-----
+step-4 	: Insert min 5 Customer details from SQL-Command-Line
+
+insert into Customer72 values(9898981234,'HM9898981234','Alex','Hyd','a@gmail.com');
+insert into Customer72 values(7676761234,'HM7676761234','Raj','Hyd','rj@gmail.com');
+insert into Customer72 values(8686861234,'HM8686861234','Ram','Hyd','rm@gmail.com');
+
+SQL> Select * from Customer72;
+
+  PHNO 	CID         		NAME        	CITY		MID
+---------------------------------------------------------------------------------
+9898981234	HM9898981234	Alex		Hyd		a@gmail.com
+7676761234  	HM7676761234   	Raj            	Hyd    		rj@gmail.com
+8686861234  	HM8686861234   	Ram           	Hyd    		rm@gmail.com
+-----
+step-5 	: 
+	Copy DB-Jar file from "lib" folder of Oracle to User defined folder(on Desktop) 
+         C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib
+                 ojdbc6.jar    -   Oarcle11
+FAQ
+Define JAR?
+	JAR stands for 'Java Archive' and which is compressed format of more number of Class files.
+Note
+	This DB-Jar file will provide JDBC drivers.
+-----
+step-6 	: Find the PortNo and ServiceName of Database Product(Oracle) PortNo and ServiceName is available from 'tnsnames.ora' file of 'Admin' folder of network
+     C:\oraclexe\app\oracle\product\11.2.0\server\network\ADMIN
+                PortNo		: 1521
+                ServiceName 	: XE
+------
+*imp
+Steps used to establish communication to Database product:
+step-1 : Loader driver
+step-2 : Creating Connection to Database Product
+step-3 : preparing JDBC-statement
+step-4 : Executing the query
+step-5 : Closing the connection from Database
