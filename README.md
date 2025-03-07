@@ -229,6 +229,76 @@ public class DBCon1 {
 
 This program connects to the Oracle database, retrieves all customer details from the `Customer72` table, and displays them in the console.
 ---
+ Construct JDBC Application to display Customer details based on PhoneNo.
+
+ ```java
+ package test;
+
+ import java.sql.Connection;
+ import java.sql.DriverManager;
+ import java.sql.ResultSet;
+ import java.sql.Statement;
+ import java.util.Scanner;
+
+ public class DBcon2 {
+
+ 	public static void main(String[] args) {
+
+ 		Scanner s = new Scanner(System.in);
+
+ 		try (s;) {
+
+ 			// Step 1: Load JDBC Driver
+ 			Class.forName("oracle.jdbc.driver.OracleDriver");
+
+ 			// Step 2: Create a Connection to the Database
+ 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "lalit");
+
+ 			// Step 3: Prepare a JDBC Statement
+ 			Statement stm = con.createStatement();
+
+ 			System.out.print("Enter the Cust-PhoneNo to display details: ");
+ 			long pNo = s.nextLong();
+
+ 			// Step 4: Execute the SQL Query
+ 			ResultSet rs = stm.executeQuery("Select * from Customer72 where phno =" + pNo + "");
+
+ 			if (rs.next()) {
+ 				System.out.println(rs.getLong(1) + "\t" +
+ 						rs.getString(2) + "\t" +
+ 						rs.getString(3) + "\t" +
+ 						rs.getString(4) + "\t" +
+ 						rs.getString(5));
+ 			} else {
+ 				System.out.println("Invalid Customer phone no..!");
+ 			}
+
+ 			// Step 5: Close the Database Connection
+ 			s.close();
+ 			con.close();
+
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		}
+
+ 	}
+
+ }
+
+```
+
+### **Expected Output**
+```
+Enter the Cust-PhoneNo to display details: 7676761234  
+7676761234    HM7676761234    Raj    Hyd    rj@gmail.com
+```
+If the phone number does not exist:
+```
+Invalid Customer phone no..!
+```
+
+This Java program connects to an Oracle database using JDBC and retrieves customer details based on a phone number input.
+---
 
 ## Contribution
 If you want to contribute or suggest improvements, feel free to fork the repository and create a pull request.
