@@ -226,10 +226,9 @@ public class DBCon1 {
     }
 }
 ```
-
 This program connects to the Oracle database, retrieves all customer details from the `Customer72` table, and displays them in the console.
 ---
- Construct JDBC Application to display Customer details based on PhoneNo.
+ ### Construct JDBC Application to display Customer details based on PhoneNo.
 
  ```java
  package test;
