@@ -1,7 +1,9 @@
-/**
- * Construct JDBC Application to perform Update and Delete Operations on Customer table.
- * (Based on Customer PhoneNo)
- */
+/**Construct JDBC Application to perform the following operations
+   1.create
+   2.insert
+   3.update
+   4.delete
+*/
 
 package test;
 
