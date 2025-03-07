@@ -6,7 +6,7 @@ This Java program connects to an **Oracle database** using **JDBC** and retrieve
 ---
 
 ### **Diagram**  
-![Diagram](PracticePrograms/JDBC_app_2/src/test/Dia-7.png)
+![Diagram](https://github.com/lalitpatil891/Code-with-AdvanceJava/blob/main/PracticePrograms/JDBC_app_2/src/test/Dia-7.png)
 
 ---
 
