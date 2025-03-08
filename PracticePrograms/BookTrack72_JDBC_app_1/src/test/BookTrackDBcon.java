@@ -122,10 +122,3 @@ public class BookTrackDBcon {
 		}
 	}
 }
-/**
- * Name Null? Type ----------------------------------------- --------
- * ---------------------------- BCODE NOT NULL NUMBER(38) BNAME NOT NULL
- * VARCHAR2(100) BAUTHOR NOT NULL VARCHAR2(100) BPRICE NOT NULL NUMBER(10,2)
- * BQTY NOT NULL NUMBER(38)
- * 
- */
