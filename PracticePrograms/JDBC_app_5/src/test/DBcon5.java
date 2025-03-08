@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DBcon5 {
@@ -42,25 +43,36 @@ public class DBcon5 {
 					System.out.print("Enter phone number: ");
 					long pno = sc.nextLong();
 					sc.nextLine();
-					System.out.print("Enter city Name: ");
-					String nCity = sc.nextLine();
 
-					System.out.print("Enter Mail id: ");
-					String mail = sc.nextLine();
+					ResultSet check = stm.executeQuery("select * from Customer72 where phno =" + pno + "");
 
-					int k = stm.executeUpdate(
-							"Update Customer72 set city='" + nCity + "',mid='" + mail + "' where phno=" + pno + "");
-
-					System.out.println("k: " + k);
-					if (k > 0) {
-
-						System.out.println("Data update Successfully..!");
+					if (!check.next()) {
+						System.err.println("No customer found with the given code. Update operation aborted.");
 					} else {
-						System.out.println("Phone number invalid");
+
+						System.out.print("Enter city Name: ");
+						String nCity = sc.nextLine();
+
+						System.out.print("Enter Mail id: ");
+						String mail = sc.nextLine();
+
+						int k = stm.executeUpdate(
+								"Update Customer72 set city='" + nCity + "',mid='" + mail + "' where phno=" + pno + "");
+
+						System.out.println("k: " + k);
+
+						if (k > 0) {
+							System.out.println("Data updated successfully!");
+						} else {
+							System.err.println("Update failed: Invalid phone number or no matching record found.");
+						}
+
 					}
 
 				} catch (SQLException e) {
-					System.out.println("Error: " + e.getMessage());
+					System.err.println("Error: " + e.getMessage());
+				} catch (Exception ee) {
+					ee.printStackTrace();
 				}
 				break;
 
@@ -70,29 +82,42 @@ public class DBcon5 {
 					System.out.print("Enter phone number: ");
 					long pnu = sc.nextLong();
 
-					// Execute the delete query
-					int rowsAffected = stm.executeUpdate("DELETE FROM customer72 WHERE phno = " + pnu);
+					ResultSet pre = stm.executeQuery("select * from Customer72 where phno =" + pnu + "");
 
-					// Check if data was deleted
-					if (rowsAffected > 0) {
-						System.out.println(pnu + " Data deleted successfully..!");
+					if (!pre.next()) {
+						System.err.println("No product found with the given code. Delete operation aborted.");
 					} else {
-						System.out.println("Invalid phone number. No record found!");
-					}
 
+					
+						int rowsAffected = stm.executeUpdate("DELETE FROM customer72 WHERE phno = " + pnu);
+
+						
+						if (rowsAffected > 0) {
+							System.out.println(pnu + " Data deleted successfully..!");
+						} else {
+							System.out.println("Invalid phone number. No record found!");
+						}
+					}
 				} catch (SQLException e) {
-					System.out.println("Error: " + e.getMessage());
+					System.err.println("Error: " + e.getMessage());
+				}catch(InputMismatchException ee)
+				{
+					System.err.println("Invalid phone number.!");
+				}
+				catch(Exception eee)
+				{
+					eee.printStackTrace();
 				}
 				break;
 
 			case 3:
+
 				ResultSet rs = stm.executeQuery("Select * from Customer72");
 
 				while (rs.next()) {
-					System.out.println(rs.getLong(1) + "\t" +
 
-							rs.getString(2) + "\t" + rs.getString(3) + "\t" + rs.getString(4) + "\t" + rs.getString(5));
-
+					System.out.println(rs.getLong(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3) + "\t"
+							+ rs.getString(4) + "\t" + rs.getString(5));
 				}
 				break;
 
@@ -107,5 +132,4 @@ public class DBcon5 {
 		}
 
 	}
-
 }
