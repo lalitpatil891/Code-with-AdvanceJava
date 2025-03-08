@@ -6,7 +6,7 @@ import java.sql.*;
 public class BookTrackDBcon {
 
 	public static void main(String[] args) {
-w
+
 		try (Scanner sc = new Scanner(System.in)) {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -35,7 +35,7 @@ w
 
 					while (num > 0) {
 
-						System.out.println("*** Enter 5 book Information ***");
+						System.out.println("*** Enter " + num + " book Information ***");
 						System.out.print("Enter Book Code: ");
 						int bcode = sc.nextInt();
 
@@ -70,7 +70,7 @@ w
 			case 2:
 
 				ResultSet rs = stm.executeQuery("Select * from bookdetails72");
-
+		
 				while (rs.next()) {
 					System.out.println(rs.getInt(1) + "\t" +
 
@@ -80,16 +80,32 @@ w
 				break;
 
 			case 3:
-
+				try {
+					
+				
 				System.out.print("Enter bookCode: ");
 				int bcode = sc.nextInt();
 
-				ResultSet result = stm.executeQuery("Select * from bookdetails72 where bcode =" + bcode + "");
-				while (result.next()) {
-					System.out.println(result.getInt(1) + "\t" + result.getString(2) + "\t" + result.getString(3) + "\t"
-							+ result.getDouble(4) + "\t" + result.getInt(5));
-				}
+				ResultSet result = stm.executeQuery("SELECT * FROM bookdetails72 WHERE bcode = " + bcode);
 
+				if (!result.isBeforeFirst()) { // Checks if the ResultSet is empty
+					System.out.println("No book found with the given BookCode: " + bcode);
+				} else {
+					while (result.next()) {
+						System.out.println(result.getInt(1) + "\t" + result.getString(2) + "\t" + result.getString(3)
+								+ "\t" + result.getDouble(4) + "\t" + result.getInt(5));
+					}
+				}
+				
+				}
+				catch(InputMismatchException mis)
+				{
+					System.err.println("Enter only integer value.");
+				}
+				catch(Exception eee)
+				{
+					eee.printStackTrace();
+				}
 				break;
 
 			default:
