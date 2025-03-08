@@ -271,11 +271,3 @@ public class InventoryAppDBcon {
 
 }
 
-/*
- * SQL> Create table Product72( code Number(5) primary key, name varchar2(30),
- * price number(5,2),qty number(5));
- * 
- * SQL> desc product72 Name Null? Type -----------------------------------------
- * -------- ---------------------------- CODE NOT NULL NUMBER(5) NAME
- * VARCHAR2(30) PRICE NUMBER(5,2) QTY NUMBER(5)
- */
