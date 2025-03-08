@@ -306,7 +306,7 @@ Invalid Customer phone no..!
 
 This Java program connects to an Oracle database using JDBC and retrieves customer details based on a phone number input.
 ---
-## [JDBC Application: Insert Customer Details into Oracle Database]()  
+## [JDBC Application: Insert Customer Details into Oracle Database](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/JDBC_app_3/src/test)  
 
 ### **Project Overview**  
 This Java program reads customer details from the console and inserts them into the `Customer72` table in an **Oracle database** using **JDBC**.  
