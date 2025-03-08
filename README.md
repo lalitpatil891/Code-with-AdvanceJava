@@ -14,8 +14,15 @@ Code-with-AdvanceJava/
 
 ## Topics Covered
 - JDBC (Java Database Connectivity)
-### 1) [JDBC Application Setup Guide](#jdbc-application-setup-guide)
-  -  [Inventory Management System](#inventory-management-system) (jdbc-app)
+  1) [JDBC Application Setup Guide](#jdbc-application-setup-guide)
+  - programs
+     - [Write the following JDBC code to display all Customer details](#write-the-following-jdbc-code-to-display-all-Customer-details)
+     - [JDBC Application: Insert Customer Details into Oracle Database](#jdbc-application:-insert-customer-details-into-oracle-database)
+     - [JDBC Application for Customer Table Operations](#jdbc-application-for-customer-table-operations)
+     - [BookTrackDBcon - JDBC Oracle Database Connectivity](#booktrackdbcon-jdbc-oracle-database-connectivity)
+     - [Inventory Management System JDBC](#inventory-management-system-jdbc) (jdbc-app)
+
+
 <!--
 - Servlets & JSP (Java Server Pages)
 - Spring Framework (Spring Boot, Spring MVC)
@@ -186,10 +193,10 @@ int k = stm.executeUpdate("UPDATE Customer72 SET name = 'John' WHERE phno = 9898
 
 ### Step 5: Create a Class (JDBC Program) in the Package
 
-Write the following JDBC code to display all Customer details.
+---
+## Write the following JDBC code to display all Customer details.
 
 ### DBCon1.java
-
 ```java
 package test;
 
@@ -227,9 +234,9 @@ public class DBCon1 {
     }
 }
 ```
-***This program connects to the Oracle database, retrieves all customer details from the `Customer72` table, and displays them in the console.***
+This program connects to the Oracle database, retrieves all customer details from the `Customer72` table, and displays them in the console.
 ---
- ### Construct JDBC Application to display Customer details based on PhoneNo.
+## [Construct JDBC Application to display Customer details based on PhoneNo.](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/JDBC_app_2/src/test)
 
  ```java
  package test;
@@ -297,9 +304,9 @@ If the phone number does not exist:
 Invalid Customer phone no..!
 ```
 
-***This Java program connects to an Oracle database using JDBC and retrieves customer details based on a phone number input.***
+This Java program connects to an Oracle database using JDBC and retrieves customer details based on a phone number input.
 ---
-## **JDBC Application: Insert Customer Details into Oracle Database**  
+## [JDBC Application: Insert Customer Details into Oracle Database]()  
 
 ### **Project Overview**  
 This Java program reads customer details from the console and inserts them into the `Customer72` table in an **Oracle database** using **JDBC**.  
@@ -402,7 +409,7 @@ This Phone No. already registered..!
 ```
 
 ---
-## JDBC Application for Customer Table Operations
+## [JDBC Application for Customer Table Operations](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/JDBC_app_3/src/test)
 
 ### Overview
 
@@ -477,7 +484,7 @@ CREATE TABLE Orders (
 - **Constraint Violations:** If an entry violates a primary key or unique constraint, the program will notify the user.
 
 ---
-## BookTrackDBcon - JDBC Oracle Database Connectivity
+## [BookTrackDBcon - JDBC Oracle Database Connectivity](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/BookTrack72_JDBC_app_1/src/test)
 
 ### Project Overview
 BookTrackDBcon is a Java-based console application that interacts with an Oracle database to manage book records. The application allows users to:
@@ -539,7 +546,7 @@ java test.BookTrackDBcon
 - Displays meaningful error messages when queries fail.
 
 ---
-## [Inventory Management System]()
+## [Inventory Management System JDBC](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/JDBC_Inventory_App/src/test)
 
 ### Introduction
 
