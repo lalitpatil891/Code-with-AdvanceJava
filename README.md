@@ -17,7 +17,7 @@ Code-with-AdvanceJava/
   1) [JDBC Application Setup Guide](#jdbc-application-setup-guide)
   - programs
      - [Write the following JDBC code to display all Customer details](#write-the-following-jdbc-code-to-display-all-Customer-details)
-     - [JDBC Application: Insert Customer Details into Oracle Database](#jdbc-application:-insert-customer-details-into-oracle-database)
+     - [JDBC Application Insert Customer Details into Oracle Database](#jdbc-application-insert-customer-details-into-oracle-database)
      - [JDBC Application for Customer Table Operations](#jdbc-application-for-customer-table-operations)
      - [BookTrackDBcon - JDBC Oracle Database Connectivity](#booktrackdbcon-jdbc-oracle-database-connectivity)
      - [Inventory Management System JDBC](#inventory-management-system-jdbc) (jdbc-app)
@@ -306,7 +306,7 @@ Invalid Customer phone no..!
 
 This Java program connects to an Oracle database using JDBC and retrieves customer details based on a phone number input.
 ---
-## [JDBC Application: Insert Customer Details into Oracle Database]()  
+## [JDBC Application Insert Customer Details into Oracle Database]()  
 
 ### **Project Overview**  
 This Java program reads customer details from the console and inserts them into the `Customer72` table in an **Oracle database** using **JDBC**.  
