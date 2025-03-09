@@ -1,8 +1,10 @@
 /**Construct JDBC Application to perform the following operations based on Choice:
+    
     1.AddBankCustomer
     2.ViewAllBankCustomers
     3.Exit
-Note: repeat the process until we perform exit operation
+	
+	Note: repeat the process until we perform exit operation
 */
 
 package test;
@@ -72,10 +74,7 @@ public class DBcon6 {
 
 					while (rs.next()) {
 
-						System.out.println(rs.getLong(1) + "\t" +
-
-								rs.getString(2) + "\t" + rs.getString(3) + "\t" + rs.getFloat(4) + "\t"
-								+ rs.getString(5) + "");
+						System.out.println(rs.getLong(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3) + "\t" + rs.getFloat(4) + "\t" + rs.getString(5) + "");
 
 					} // loop-end
 
