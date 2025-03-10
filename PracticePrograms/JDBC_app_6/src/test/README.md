@@ -9,6 +9,9 @@ This is a simple JDBC-based application that allows users to perform the followi
 
 The application continuously runs until the user chooses to exit.
 
+### Diagram
+![Program Diagram](https://github.com/lalitpatil891/Code-with-AdvanceJava/blob/main/Notes/Diagram's/JDBC_app_6.png)
+
 ## Prerequisites
 To run this application, ensure you have the following installed:
 
