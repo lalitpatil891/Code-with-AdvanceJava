@@ -923,7 +923,7 @@ This Java application connects to an Oracle database using JDBC and allows users
 2. **Delete Bank Customer** - Remove a customer record from the database.
 
 ### Diagram
-![Diagram]()
+![Diagram](https://github.com/lalitpatil891/Code-with-AdvanceJava/blob/main/PracticePrograms/JDBC_app_7/src/test/JDBC_app_7.png)
 
 ### Prerequisites
 - Java Development Kit (JDK) installed.
