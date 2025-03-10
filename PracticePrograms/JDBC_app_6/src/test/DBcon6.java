@@ -23,8 +23,8 @@ public class DBcon6 {
 
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "lalit");
 			PreparedStatement ps1 = con.prepareStatement("insert into BankCustomer72 values(?,?,?,?,?)");
+			
 			// Compilation Process
-
 			PreparedStatement ps2 = con.prepareStatement("select * from BankCustomer72"); // Compilation process
 
 			while (true) {
@@ -35,6 +35,7 @@ public class DBcon6 {
 				int choice = Integer.parseInt(sc.nextLine());
 
 				switch (choice) {
+				
 				// AddBankCustomer
 				case 1:
 
@@ -69,7 +70,6 @@ public class DBcon6 {
 
 				// ViewAllVBankCustomer
 				case 2:
-
 					ResultSet rs = ps2.executeQuery();
 
 					while (rs.next()) {
@@ -82,7 +82,6 @@ public class DBcon6 {
 
 				// Exit
 				case 3:
-
 					System.out.println("Exit Successfully.");
 					System.exit(0);
 					break;
