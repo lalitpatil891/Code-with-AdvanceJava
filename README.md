@@ -1009,7 +1009,7 @@ DELETE FROM BankCustomer72 WHERE ACCNO = ?;
 # [Student Registration and Login System](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/JDBC_task_day01/src/test)
 
 ## Diagram
-![Diagram]()
+![Diagram](https://github.com/lalitpatil891/Code-with-AdvanceJava/blob/main/PracticePrograms/JDBC_task_day01/src/test/jdbc_task_day01.png)
 
 ## Description
 

@@ -1,7 +1,7 @@
 # Student Registration and Login System
 
 ## Diagram
-![Diagram]()
+![Diagram](https://github.com/lalitpatil891/Code-with-AdvanceJava/blob/main/PracticePrograms/JDBC_task_day01/src/test/jdbc_task_day01.png)
 
 ## Description
 
