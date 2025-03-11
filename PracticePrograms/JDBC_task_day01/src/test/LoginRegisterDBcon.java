@@ -14,15 +14,13 @@ public class LoginRegisterDBcon {
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "lalit");
 
 			PreparedStatement insertQuery = con.prepareStatement("insert into StudentInfo values(?,?,?,?,?,?,?)");
-
 			PreparedStatement regVerify = con.prepareStatement("Select * from StudentInfo where rollno=? AND fname=?");
-
 			PreparedStatement check = con.prepareStatement("Select * from StudentInfo where rollno=?");
-
 			PreparedStatement updateQuery = con
 					.prepareStatement("update StudentInfo set mailid=?, phno=? where rollno=?");
 
 			PreparedStatement case1Query = con.prepareStatement("select * from StudentInfo where percentage> 60");
+			PreparedStatement case3Check = con.prepareStatement("Select * from StudentInfo where percentage> 30 AND percentage<60");
 			PreparedStatement case3Query = con.prepareStatement("delete from StudentInfo where percentage> 30 AND percentage<60");
 			PreparedStatement case4Query = con.prepareStatement("Select * from StudentInfo where percentage> 80");
 			PreparedStatement viewAll = con.prepareStatement("Select * from StudentInfo");
@@ -30,35 +28,50 @@ public class LoginRegisterDBcon {
 			while (true) {
 
 				System.out.println("**** Choose option ****");
-				System.out.println(" 1. Register \n 2. Login ");
+				System.out.println(" 1. Register \n 2. Login \n 3. Exit ");
 				System.out.print("Enter your Choice:");
 				int choice = sc.nextInt();
-
+//--- switch 1 ---
 				switch (choice) {
 				// Register
 				case 1:
+
 					System.out.print("Enter you RollNo:");
 					int rollno = sc.nextInt();
 
 					sc.nextLine();
 					System.out.print("Enter your name:");
-					String name = sc.nextLine();
+					String name = sc.nextLine().trim();
 
 					System.out.print("Enter your percentage:");
 					float per = sc.nextFloat();
 
 					sc.nextLine();
-					System.out.print("Enter your first name:");
-					String fname = sc.nextLine();
-
-					System.out.print("Enter your last name:");
-					String lname = sc.nextLine();
+					/*
+					 * System.out.print("Enter your first name:"); String fname = sc.nextLine();
+					 *
+					 * System.out.print("Enter your last name:"); String lname = sc.nextLine();
+					 */
 
 					System.out.print("Enter your mailID:");
 					String mailid = sc.nextLine();
 
 					System.out.print("Enter your PhoneNumber: ");
 					long phno = sc.nextLong();
+
+					String fname = "", lname = "";
+
+					for (int i = 0; i < name.length(); i++) {
+						if (name.charAt(i) == ' ') {
+							fname = name.substring(0, i);
+							lname = name.substring(i + 1);
+						}
+					}
+
+					if (fname.isEmpty()) {
+						fname = name;
+						lname = "";
+					}
 
 					insertQuery.setInt(1, rollno);
 					insertQuery.setString(2, name);
@@ -70,10 +83,11 @@ public class LoginRegisterDBcon {
 
 					int k = insertQuery.executeUpdate();
 					if (k > 0) {
-						System.out.println("Student record updated successfully.");
+						System.out.println("Student record inserted successfully.");
 					} else {
-						System.err.println("Something else.. please retry again...!");
+						System.err.println("Insertion failed. Please retry.");
 					}
+
 					break;
 
 				// Login
@@ -92,22 +106,24 @@ public class LoginRegisterDBcon {
 					ResultSet verify = regVerify.executeQuery();
 
 					if (verify.next()) {
+						System.out.println("Login Successful. ");
 
 						while (true) {
 
-							System.out.println("Login Successfully..");
-
+							System.out.println("\n**Menu**");
 							System.out.println("--------------------------------------------------");
 							System.out.println("1. Show Students Whose percentage>60%");
 							System.out.println("2. Update Mailid & Phono based on RollNo");
 							System.out.println("3. Delete student whose Percentage between 30% to 60%");
-							System.out.println("4. Find how many student got more than 80%");							
+							System.out.println("4. Find how many student got more than 80%");
 							System.out.println("5. View All records..");
 							System.out.println("6. Exit");
 
 							System.out.println("Choose Option:");
 							int op = sc.nextInt();
+//--- switch 2 ---
 							switch (op) {
+							//1. Show Students Whose percentage>60%
 							case 1:
 
 								ResultSet rs1 = case1Query.executeQuery();
@@ -121,6 +137,8 @@ public class LoginRegisterDBcon {
 								}
 
 								break;
+
+							//2. Update Mailid & Phono based on RollNo
 							case 2:
 
 								System.out.print("Enter you RollNo:");
@@ -155,77 +173,90 @@ public class LoginRegisterDBcon {
 								}
 								break;
 
+							//3. Delete student whose Percentage between 30% to 60%
 							case 3:
-								
-								int x = case3Query.executeUpdate();
-								
-								if(x>0)
-								{
-									System.out.println("Record Delated Succefully.");
+
+								ResultSet delVerify = case3Check.executeQuery();
+								int count = 0;
+								while (delVerify.next()) {
+									count++;
+									System.out.println(delVerify.getInt(1) + "\t" + delVerify.getString(2) + "\t"
+											+ delVerify.getFloat(3) + "\t" + delVerify.getString(4) + "\t"
+											+ delVerify.getString(5) + "\t" + delVerify.getString(6) + "\t"
+											+ delVerify.getLong(7) + "");
 								}
-								else
-								{
-									System.err.println("Opration unsuccessfull");
+								System.out.println("\n" + count
+										+ " records found. Do you want to delete them? If yes, please enter [yes/y || no/n]: ");
+								String cnf = sc.next().toLowerCase();
+
+								if (cnf.equals("yes") || cnf.equals("y")) {
+									int x = case3Query.executeUpdate();
+
+									if (x > 0) {
+										System.out.println("Record Delated Succefully.");
+									} else {
+										System.err.println("Opration unsuccessfull");
+									}
+								} else {
+									System.err.println("Delete oparation aborted.");
 								}
-								
+
 								break;
-								
+
+							//4. Find how many student got more than 80%
 							case 4:
-								
+
 								ResultSet rs2 = case4Query.executeQuery();
-								
-								while(rs2.next())
-								{
+
+								while (rs2.next()) {
 									System.out.println(rs2.getInt(1) + "\t" + rs2.getString(2) + "\t" + rs2.getFloat(3)
-									+ "\t" + rs2.getString(4) + "\t" + rs2.getString(5) + "\t"
-									+ rs2.getString(6) + "\t" + rs2.getLong(7) + "");
+											+ "\t" + rs2.getString(4) + "\t" + rs2.getString(5) + "\t"
+											+ rs2.getString(6) + "\t" + rs2.getLong(7) + "");
 								}
-								
+
 								break;
-								
-								
+
+							//5. View All records..
 							case 5:
-								
+
 								ResultSet rsAll = viewAll.executeQuery();
-								while(rsAll.next())
-								{
-									System.out.println(rsAll.getInt(1) + "\t" + rsAll.getString(2) + "\t" + rsAll.getFloat(3)
-									+ "\t" + rsAll.getString(4) + "\t" + rsAll.getString(5) + "\t"
-									+ rsAll.getString(6) + "\t" + rsAll.getLong(7) + "");
+								while (rsAll.next()) {
+									System.out.println(rsAll.getInt(1) + "\t" + rsAll.getString(2) + "\t"
+											+ rsAll.getFloat(3) + "\t" + rsAll.getString(4) + "\t" + rsAll.getString(5)
+											+ "\t" + rsAll.getString(6) + "\t" + rsAll.getLong(7) + "");
 								}
-								
-								
-								
 								break;
-								
+
+							//6. Exit
 							case 6:
-			
-								System.out.println("Logout Successfull..");
-								System.exit(0);
-								break;
-								
-							}
-						}
+
+								 System.out.println("Exiting the program successfully...");
+								 System.exit(0);
+
+							}//switch-end
+						}//loop-end
 
 					} else {
 						System.err.println("User not found..");
 					}
 					break;
 
-				case 3 : 
-					
-					System.out.println("Exit success");
-					System.exit(0);
-					break;
-					
+				case 3:
+				    System.out.println("Exiting the program successfully...");
+				    System.exit(0);
+
 				default:
 					System.err.println("Invalid choice!!!");
 					break;
 				}
 
 			}
+		} catch (SQLIntegrityConstraintViolationException ss) {
+			System.err.println("The student already registered.");
+		} catch (SQLDataException num) {
+			System.err.println("Please enter valid data. I think you entered a number of more than 10 digits.");
 		} catch (InputMismatchException inp) {
-			System.err.println("Invalid input please enter valid info...!");
+			System.err.println("Invalid input! Please enter a valid number.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -236,7 +267,7 @@ public class LoginRegisterDBcon {
 
 /**
  * SQL> select * from studentinfo;
- * 
+ *
  * ROLLNO NAME PERCENTAGE FNAME LNAME MAILID PHNO ------- -------------
  * ---------- ------- ------- ------------- --------- 201 Lalit Patil 70.23
  * Lalit Patil lp@gmail.com 7038898336
