@@ -1,5 +1,5 @@
 /**
- * Construct JDBC Application to perform the following operations on Choice based on AccNo
+ *  Construct JDBC Application to perform the following operations on Choice based on AccNo
  * 		1.UpdateBankCustomer
  * 		2.DeleteBankCustomer
  */
@@ -19,10 +19,8 @@ public class DBcon7 {
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-		
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "lalit");
 
-	
 			PreparedStatement updateQuery = con
 					.prepareStatement("update BankCustomer72 set BALANCE=?, ACCTYPE=? where ACCNO=?");
 
@@ -115,7 +113,6 @@ public class DBcon7 {
 				}
 
 			}
-		
 
 		} catch (SQLSyntaxErrorException sql) {
 			System.err.println("Error:" + sql.getMessage() + "\t ErrorCode:" + sql.getErrorCode());
@@ -129,13 +126,13 @@ public class DBcon7 {
 
 /**
  * SQL> select * from BankCustomer72 ;
- * 
+ *
  * 1 2 3 4 5 ACCNO CID CNAME BALANCE ACCTYPE
- * 
+ *
  * ======================================================================== SQL>
  * desc BankCustomer72; Name Null? Type
  * ----------------------------------------- --------
  * ---------------------------- ACCNO NOT NULL NUMBER(15) CID VARCHAR2(15) CNAME
  * VARCHAR2(15) BALANCE NUMBER(10,2) ACCTYPE VARCHAR2(15)
- * 
+ *
  */
