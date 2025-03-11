@@ -25,7 +25,7 @@ Code-with-AdvanceJava/
   - programs on preparedStatement
      - [JDBC Bank Customer Management Application](#jdbc-bank-customer-management-application)
      - [JDBC Application Bank Customer Management](#jdbc-application-bank-customer-management)
-     - [Student Registration and Login System]([#student-registration-and-login-system)
+     - [Student Registration and Login System](#student-registration-and-login-system)
 
 
 <!--
