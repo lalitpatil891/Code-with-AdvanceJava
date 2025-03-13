@@ -241,9 +241,9 @@ public class DBCon1 {
     }
 }
 ```
-This program connects to the Oracle database, retrieves all customer details from the `Customer72` table, and displays them in the console.
+     This program connects to the Oracle database, retrieves all customer details from the `Customer72` table, and displays them in the console.
 ---
-## ResultSet in JDBC
+### ResultSet in JDBC
 
 ### Overview
 `ResultSet` is an interface from the `java.sql` package, used to hold the results generated from `SELECT` queries in JDBC.
@@ -377,10 +377,9 @@ If the phone number does not exist:
 ```
 Invalid Customer phone no..!
 ```
-
-This Java program connects to an Oracle database using JDBC and retrieves customer details based on a phone number input.
+	This Java program connects to an Oracle database using JDBC and retrieves customer details based on a phone number input.
 ---
-## [JDBC Application Insert Customer Details into Oracle Database]()  
+### [JDBC Application Insert Customer Details into Oracle Database]()  
 
 ### **Project Overview**  
 This Java program reads customer details from the console and inserts them into the `Customer72` table in an **Oracle database** using **JDBC**.  
