@@ -15,6 +15,7 @@ Code-with-AdvanceJava/
 ## Topics Covered
 - JDBC (Java Database Connectivity)
   1) [JDBC Application Setup Guide](#jdbc-application-setup-guide)
+  2) [ResultSet in JDBC](#resultset-in-jdbc)
   - programs on statement
      - [Write the following JDBC code to display all Customer details](#write-the-following-jdbc-code-to-display-all-Customer-details)
      - [JDBC Application Insert Customer Details into Oracle Database](#jdbc-application-insert-customer-details-into-oracle-database)
