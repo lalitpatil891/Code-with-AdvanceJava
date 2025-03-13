@@ -34,7 +34,7 @@ Code-with-AdvanceJava/
 - Spring Framework (Spring Boot, Spring MVC)
 - Hibernate & JPA (Java Persistence API)
 - Web Services (REST & SOAP APIs)
-- Multithreading & Concurrency
+- Multithreading & ConcurrencyG
 - Design Patterns in Java
 - Networking in Java
 
@@ -241,6 +241,73 @@ public class DBCon1 {
 }
 ```
 This program connects to the Oracle database, retrieves all customer details from the `Customer72` table, and displays them in the console.
+---
+## ResultSet in JDBC
+
+### Overview
+`ResultSet` is an interface from the `java.sql` package, used to hold the results generated from `SELECT` queries in JDBC.
+
+## Types of ResultSet Objects
+### 1. Non-Scrollable ResultSet Objects
+- In Non-Scrollable ResultSet Objects, the cursor can move only in one direction: **forward**.
+- Syntax to create a Non-Scrollable `ResultSet` Object:
+
+  **Using `Statement`**:
+  ```java
+  Statement stm = con.createStatement();
+  ResultSet rs = stm.executeQuery("SELECT * FROM table_name");
+  ```
+
+  **Using `PreparedStatement`**:
+  ```java
+  PreparedStatement ps = con.prepareStatement("SELECT * FROM table_name");
+  ResultSet rs = ps.executeQuery();
+  ```
+
+### 2. Scrollable ResultSet Objects
+- In Scrollable ResultSet Objects, the cursor can move **both forward and backward**.
+- Syntax to create a Scrollable `ResultSet` Object:
+
+  **Using `Statement`**:
+  ```java
+  Statement stm = con.createStatement(type, mode);
+  ResultSet rs = stm.executeQuery("SELECT * FROM table_name");
+  ```
+
+  **Using `PreparedStatement`**:
+  ```java
+  PreparedStatement ps = con.prepareStatement("SELECT * FROM table_name", type, mode);
+  ResultSet rs = ps.executeQuery();
+  ```
+
+### Explanation of Parameters
+### `type`
+Specifies the **cursor direction** on the `ResultSet` Object. It can take the following values from the `ResultSet` interface:
+```java
+public static final int TYPE_FORWARD_ONLY;
+public static final int TYPE_SCROLL_INSENSITIVE;
+public static final int TYPE_SCROLL_SENSITIVE;
+```
+
+### `mode`
+Specifies the **action** that can be performed on the `ResultSet` Object. It can take the following values:
+```java
+public static final int CONCUR_READ_ONLY;
+public static final int CONCUR_UPDATABLE;
+```
+
+### Important Cursor Methods
+To control the cursor on a `ResultSet` Object, the following methods are used:
+
+1. `afterLast()` - Moves the cursor **after the last row**.
+2. `beforeFirst()` - Moves the cursor **before the first row**.
+3. `first()` - Moves the cursor to the **first row**.
+4. `last()` - Moves the cursor to the **last row**.
+5. `previous()` - Moves the cursor **backward**.
+6. `next()` - Moves the cursor **forward**.
+7. `absolute(int rowNumber)` - Moves the cursor to the **specified row number**.
+8. `relative(int rowOffset)` - Moves the cursor **forward or backward** based on the offset value.
+
 ---
 ## [Construct JDBC Application to display Customer details based on PhoneNo.](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/JDBC_app_2/src/test)
 
