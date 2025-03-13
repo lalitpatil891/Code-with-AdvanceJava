@@ -27,7 +27,7 @@ Code-with-AdvanceJava/
      - [JDBC Application Bank Customer Management](#jdbc-application-bank-customer-management)
      - [Student Registration and Login System](#student-registration-and-login-system)
      - [JDBC Product Management Program](#jdbc-product-management-program)
-     - [JDBC Customer & Bank Management Program]([#jdbc-customer-&-bank-management-program)
+     - [JDBC Customer & Bank Management Program](#jdbc-customer--bank-management-program)
 
 <!--
 - Servlets & JSP (Java Server Pages)
@@ -1202,7 +1202,7 @@ INSERT INTO Product40 VALUES (204, 'Redmi9', 12000, 20);
 - Use `ResultSet.TYPE_SCROLL_INSENSITIVE` for efficient navigation of result sets.
 
 ---
-# [JDBC Customer & Bank Management Program]()
+# [JDBC Customer & Bank Management Program](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/JDBC_app_8/src/test)
 
 ## Overview
 This Java program demonstrates JDBC (Java Database Connectivity) operations using an Oracle database. The program allows users to interact with two tables: `Customer72` and `BankCustomer72`. It supports retrieving records in different orders and navigating customer records efficiently.
