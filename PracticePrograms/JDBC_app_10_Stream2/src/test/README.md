@@ -3,6 +3,10 @@
 ### Overview
 This Java program demonstrates how to retrieve an image stored as a BLOB in an Oracle database and save it to a specified file location.
 
+## Diagram
+![Diagram](https://github.com/lalitpatil891/Code-with-AdvanceJava/blob/main/PracticePrograms/JDBC_app_10_Stream2/src/test/Dia-12.png)
+
+
 ### Prerequisites
 - Oracle Database (installed and running)
 - Oracle JDBC Driver (`ojdbc.jar`)

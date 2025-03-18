@@ -32,8 +32,8 @@ Code-with-AdvanceJava/
      - [JDBC Customer & Bank Management Program](#jdbc-customer--bank-management-program)
      - [Employee Management System (JDBC Application)](#employee-management-system-jdbc-application)
   - **Stream Data Programs**
-     - [Storing Stream Data (Image) to Database Product](#storing-stream-data-to-database-product)
-     - [Retrieving Stream (Image) from Database](#)
+     - [Storing Stream Data (Image) to Database Product](#storing-stream-data-image-to-database-product)
+     - [Retrieving Stream (Image) from Database](#retrieving-stream-image-from-database)
 <!--
 - Servlets & JSP (Java Server Pages)
 - Spring Framework (Spring Boot, Spring MVC)
@@ -1442,10 +1442,14 @@ Table Name: **Employee72**
 
 ---
 
-## [Storing Stream Data (Image) to Database Product]()
+## [Storing Stream Data (Image) to Database Product](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/JDBC_app_9_Stream1/src/test)
 
 ### Overview
 This Java program demonstrates how to store image files in an Oracle database using JDBC. The application prompts the user for an ID, name, and image file path, then inserts the image as a BLOB into the database.
+
+## Diagram
+![Diagram](https://github.com/lalitpatil891/Code-with-AdvanceJava/blob/main/PracticePrograms/JDBC_app_9_Stream1/src/test/Dia-11.png)
+
 
 ### Prerequisites
 - Oracle Database (installed and running)
@@ -1497,10 +1501,14 @@ CREATE TABLE StreamTab72 (
 - Replace `system` and `lalit` with the appropriate database username and password.
 
 ---
-## [Retrieving Stream (Image) from Database]()
+## [Retrieving Stream (Image) from Database](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/JDBC_app_10_Stream2/src/test)
 
 ### Overview
-This Java program demonstrates how to retrieve an image stored as a BLOB in an Oracle database and save it to a specified file location.
+This Java program demonstrates how to retrieve an image stored as a BLOB in an Oracle database
+and save it to a specified file location.
+
+## Diagram
+![Diagram](https://github.com/lalitpatil891/Code-with-AdvanceJava/blob/main/PracticePrograms/JDBC_app_10_Stream2/src/test/Dia-12.png)
 
 ### Prerequisites
 - Oracle Database (installed and running)

@@ -3,6 +3,9 @@
 ### Overview
 This Java program demonstrates how to store image files in an Oracle database using JDBC. The application prompts the user for an ID, name, and image file path, then inserts the image as a BLOB into the database.
 
+## Diagram
+![Diagram](https://github.com/lalitpatil891/Code-with-AdvanceJava/blob/main/PracticePrograms/JDBC_app_9_Stream1/src/test/Dia-11.png)
+
 ### Prerequisites
 - Oracle Database (installed and running)
 - Oracle JDBC Driver (`ojdbc.jar`)
