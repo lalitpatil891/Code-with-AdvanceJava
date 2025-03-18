@@ -16,21 +16,24 @@ Code-with-AdvanceJava/
 - JDBC (Java Database Connectivity)
   1) [JDBC Application Setup Guide](#jdbc-application-setup-guide)
   2) [ResultSet in JDBC](#resultset-in-jdbc)
-  - programs on statement
+  3) [Streams with Database product](#streams-with-database-product)
+  - **programs on statement**
      - [Write the following JDBC code to display all Customer details](#write-the-following-jdbc-code-to-display-all-Customer-details)
      - [JDBC Application Insert Customer Details into Oracle Database](#jdbc-application-insert-customer-details-into-oracle-database)
      - [JDBC Application for Customer Table Operations](#jdbc-application-for-customer-table-operations)
      - [BookTrackDBcon - JDBC Oracle Database Connectivity](#booktrackdbcon-jdbc-oracle-database-connectivity)
      - [Product Management System](#product-management-system)
      - [Inventory Management System JDBC](#inventory-management-system-jdbc) (jdbc-app)
-  - programs on preparedStatement
+  - **programs on preparedStatement**
      - [JDBC Bank Customer Management Application](#jdbc-bank-customer-management-application)
      - [JDBC Application Bank Customer Management](#jdbc-application-bank-customer-management)
      - [Student Registration and Login System](#student-registration-and-login-system)
      - [JDBC Product Management Program](#jdbc-product-management-program)
      - [JDBC Customer & Bank Management Program](#jdbc-customer--bank-management-program)
      - [Employee Management System (JDBC Application)](#employee-management-system-jdbc-application)
-
+  - **Stream Data Programs**
+     - [Storing Stream Data (Image) to Database Product](#storing-stream-data-to-database-product)
+     - [Retrieving Stream (Image) from Database](#)
 <!--
 - Servlets & JSP (Java Server Pages)
 - Spring Framework (Spring Boot, Spring MVC)
@@ -313,11 +316,11 @@ To control the cursor on a `ResultSet` Object, the following methods are used:
 ---
 ## Streams with Database product
 ### Define stream? (Normal definition)
-   The continuous flow of data is known as stream.
+The continuous flow of data is known as stream.
 ### Types of streams
   Java language support two types of streams:
-         1. Byte Stream (Binary Stream)
-         2. Character Stream
+         1. **Byte Stream (Binary Stream)**
+         2. **Character Stream**
 
 ### 1. Byte Stream(Binary Stream)
       The continuous flow of data in the form of 8-bits is known as Byte Stream or Binary Stream.
@@ -328,8 +331,8 @@ To control the cursor on a `ResultSet` Object, the following methods are used:
       Character Stream is preferable for Text data,and which is not preferable for Audio, Video,Image and Animation data.
 ------
 ###	We use the following SQL-Types to store Stream data:
-    		 1. BLOB
-     		 2. CLOB
+    1. **BLOB**
+    2. **CLOB**
 
 ### 1. BLOB
   BLOB stands for 'Binary Large Objects' and which is used to store Byte Stream data.
@@ -1437,6 +1440,116 @@ Table Name: **Employee72**
 - Catches invalid input types to prevent runtime errors.
 - Handles SQL exceptions gracefully.
 
+---
+
+## [Storing Stream Data (Image) to Database Product]()
+
+### Overview
+This Java program demonstrates how to store image files in an Oracle database using JDBC. The application prompts the user for an ID, name, and image file path, then inserts the image as a BLOB into the database.
+
+### Prerequisites
+- Oracle Database (installed and running)
+- Oracle JDBC Driver (`ojdbc.jar`)
+- Java Development Kit (JDK)
+- Basic knowledge of JDBC
+
+### Database Setup
+Before running the program, create the required database table:
+
+```sql
+CREATE TABLE StreamTab72 (
+    id VARCHAR2(10) PRIMARY KEY,
+    name VARCHAR2(15),
+    mfile BLOB
+);
+```
+
+### Steps to Run the Program
+1. **Compile the Java Program:**
+   ```sh
+   javac DBcon9.java
+   ```
+
+2. **Run the Program:**
+   ```sh
+   java test.DBcon9
+   ```
+
+3. **Provide the following inputs:**
+   - User ID
+   - User Name
+   - Image file path
+
+### Code Explanation
+- **Step 1:** Load the Oracle JDBC driver.
+- **Step 2:** Establish a connection to the Oracle database.
+- **Step 3:** Use `PreparedStatement` to insert data into the `StreamTab72` table.
+- **Step 4:** Read the image file as a binary stream and store it in the database.
+- **Step 5:** Execute the update and confirm the successful storage of the image.
+
+### Error Handling
+- If the provided file path is incorrect or the file does not exist, an error message will be displayed.
+- Any SQL or connection-related errors will be printed in the console.
+
+### Notes
+- Ensure the Oracle database is running before executing the program.
+- Modify the database connection string (`jdbc:oracle:thin:@localhost:1521:xe`) if required.
+- Replace `system` and `lalit` with the appropriate database username and password.
+
+---
+## [Retrieving Stream (Image) from Database]()
+
+### Overview
+This Java program demonstrates how to retrieve an image stored as a BLOB in an Oracle database and save it to a specified file location.
+
+### Prerequisites
+- Oracle Database (installed and running)
+- Oracle JDBC Driver (`ojdbc.jar`)
+- Java Development Kit (JDK)
+- Basic knowledge of JDBC
+
+### Database Setup
+Before running the program, ensure that the `StreamTab72` table exists and contains image data. The table can be created using:
+
+```sql
+CREATE TABLE StreamTab72 (
+    id VARCHAR2(10) PRIMARY KEY,
+    name VARCHAR2(15),
+    mfile BLOB
+);
+```
+
+### Steps to Run the Program
+1. **Compile the Java Program:**
+   ```sh
+   javac DBcon10.java
+   ```
+
+2. **Run the Program:**
+   ```sh
+   java test.DBcon10
+   ```
+
+3. **Provide the following inputs:**
+   - User ID to retrieve details
+   - Destination file path to save the retrieved image
+
+### Code Explanation
+- **Step 1:** Load the Oracle JDBC driver.
+- **Step 2:** Establish a connection to the Oracle database.
+- **Step 3:** Use `PreparedStatement` to fetch the image from the `StreamTab72` table using the provided user ID.
+- **Step 4:** Retrieve the image as a BLOB and store it in a byte array.
+- **Step 5:** Save the byte array as an image file at the specified location.
+
+### Error Handling
+- If the provided user ID does not exist, an error message is displayed.
+- Any SQL or file handling errors are printed in the console.
+
+### Notes
+- Ensure the Oracle database is running before executing the program.
+- Modify the database connection string (`jdbc:oracle:thin:@localhost:1521:xe`) if required.
+- Replace `system` and `lalit` with the appropriate database username and password.
+- Ensure that the destination file path is valid and writable.
 
 ---
 
