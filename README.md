@@ -320,12 +320,12 @@ To control the cursor on a `ResultSet` Object, the following methods are used:
          2. Character Stream
 
 ### 1. Byte Stream(Binary Stream)
-The continuous flow of data in the form of 8-bits is known as Byte Stream or Binary Stream.
-Through Byte Stream we can send all Multi-Media data formats,which means Text, Audio, Video, Image and Animation.
+      The continuous flow of data in the form of 8-bits is known as Byte Stream or Binary Stream.
+      Through Byte Stream we can send all Multi-Media data formats,which means Text, Audio, Video, Image and Animation.
 
 ### 2. Character Stream
-The Continuous flow of data in the form of 16-bits is known as Character Stream or Text Stream.
-Character Stream is preferable for Text data,and which is not preferable for Audio, Video,Image and Animation data.
+      The Continuous flow of data in the form of 16-bits is known as Character Stream or Text Stream.
+      Character Stream is preferable for Text data,and which is not preferable for Audio, Video,Image and Animation data.
 ------
 ###	We use the following SQL-Types to store Stream data:
     		 1. BLOB
