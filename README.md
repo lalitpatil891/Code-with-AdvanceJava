@@ -34,6 +34,8 @@ Code-with-AdvanceJava/
   - **Stream Data Programs**
      - [Storing Stream Data (Image) to Database Product](#storing-stream-data-image-to-database-product)
      - [Retrieving Stream (Image) from Database](#retrieving-stream-image-from-database)
+     - [JDBC Program to Insert Employee Details into Database]()
+     - [JDBC Program to Insert Image into Database]()
 <!--
 - Servlets & JSP (Java Server Pages)
 - Spring Framework (Spring Boot, Spring MVC)
