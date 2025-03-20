@@ -1,4 +1,4 @@
-## Employee Management System
+## +JDBC Application Demonstrating Stored Procedure Execution
 
 This project demonstrates how to create and manage an employee database using Oracle SQL and Java JDBC. It includes table creation, a stored procedure for inserting employee data, and a Java program to execute the procedure.
 
