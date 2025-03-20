@@ -2,6 +2,9 @@
 
 This project demonstrates how to create and manage an employee database using Oracle SQL and Java JDBC. It includes table creation, a stored procedure for inserting employee data, and a Java program to execute the procedure.
 
+## Diagram
+![Diagram](https://github.com/lalitpatil891/Code-with-AdvanceJava/blob/main/PracticePrograms/JDBC_app_11_procedure1/src/test/Dia-14.png)
+
 ### Database Schema
 The following tables are created to store employee details:
 
