@@ -1,0 +1,35 @@
+SQL> create table StudentInfo(
+	rollno number(3) PRIMARY KEY,
+	name varchar2(30),
+	percentage decimal(3,2),
+	fname varchar2(10),
+	lname varchar2(10),
+	mailid varchar2(10),
+	phno number(10)
+	);
+
+SQL> desc StudentInfo;
+ Name                                      Null?    Type
+ ----------------------------------------- --------
+ ROLLNO                                    NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(30)
+ PERCENTAGE                                         NUMBER(3,2)
+ FNAME                                              VARCHAR2(10)
+ LNAME                                              VARCHAR2(10)
+ MAILID                                             VARCHAR2(10)
+ PHNO                                               NUMBER(10)
+
+---------
+SQL> insert into StudentInfo values(201,'Lalit Patil',70.23,'Lalit','Patil','lp@gmail.com','7038898336');
+
+---------
+
+SQL> select * from studentinfo;
+
+    ROLLNO NAME          PERCENTAGE  FNAME   LNAME  MAILID          PHNO
+    ------- ------------- ---------- ------- ------- -------------  ---------
+       201 Lalit Patil   70.23 	     Lalit   Patil  lp@gmail.com   7038898336
+
+---------
+
+SQL> Select * from StudentInfo where rollno= 201 AND name= 'Lalit Patil';
