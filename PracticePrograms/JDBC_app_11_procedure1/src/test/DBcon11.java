@@ -1,3 +1,11 @@
+/** 
+ * Construct Application to demonstrate Procedure
+ * Step-1 : Create the following tables
+ * 	  EmpData72(eid,ename,edesg);
+ *    EmpAddress72(eid,hno,sname,city,state,pincode);
+ *    EmpContact72(eid,mid,phno);
+ *    EmpSalary72(eid,bsal,hra,da,totsal);
+ */
 package test;
 
 import java.util.*;
@@ -65,31 +73,13 @@ public class DBcon11 {
 	}
 }
 
-
-/*OUTPUT
-
-Enter the Emp-Id:
-T121
-Enter the Emp-Name:
-Lalit
-Enter the Emp-Desg:
-Manager
-Enter the Emp-HNo:
-23
-Enter the Emp-SName:
-Lalit Patil
-Enter the Emp-City:
-HYD
-Enter the Emp-State:
-Telangana
-Enter the Emp-PinCode:
-425408
-Enter the Emp-MailId:
-lp@gmail.com
-Enter the Emp-PhNo:
-7038898336
-Enter the Emp-bSal:
-50000
-Employee added Successsfully....
-
-*/
+/*
+ * OUTPUT
+ * 
+ * Enter the Emp-Id: T121 Enter the Emp-Name: Lalit Enter the Emp-Desg: Manager
+ * Enter the Emp-HNo: 23 Enter the Emp-SName: Lalit Patil Enter the Emp-City:
+ * HYD Enter the Emp-State: Telangana Enter the Emp-PinCode: 425408 Enter the
+ * Emp-MailId: lp@gmail.com Enter the Emp-PhNo: 7038898336 Enter the Emp-bSal:
+ * 50000 Employee added Successsfully....
+ * 
+ */
