@@ -17,6 +17,20 @@ Code-with-AdvanceJava/
   1) [JDBC Application Setup Guide](#jdbc-application-setup-guide)
   2) [ResultSet in JDBC](#resultset-in-jdbc)
   3) [Streams with Database product](#streams-with-database-product)
+    - FileInputStream
+    - FileOutputStream
+    - CallableStatement
+    - Function
+    - Procedure
+    - Types of Procedures
+
+  4) [MetaData]()
+    - DatabaseMetaData
+    - ParameterMetaData
+    - ResultSetMetaData
+  5) [JDBC Batch Processing](#jdbc-batch-processing)
+    -
+
   - **programs on statement**
      - [Write the following JDBC code to display all Customer details](#write-the-following-jdbc-code-to-display-all-Customer-details)
      - [JDBC Application Insert Customer Details into Oracle Database](#jdbc-application-insert-customer-details-into-oracle-database)
@@ -41,6 +55,9 @@ Code-with-AdvanceJava/
      - [JDBC Application Demonstrating Stored Procedure Execution](#jdbc-application-demonstrating-stored-procedure-execution)
      - [Employee Details Retrieval using JDBC and Stored Procedure](#employee-details-retrieval-using-jdbc-and-stored-procedure)
      - [JDBC Function Demonstration](#jdbc-function-demonstration)
+
+  - **Batch processing**
+     - [JDBC Batch Processing](#jdbc-batch-processing)
 <!--
 - Servlets & JSP (Java Server Pages)
 - Spring Framework (Spring Boot, Spring MVC)
@@ -347,7 +364,185 @@ The continuous flow of data is known as stream.
 ### 2. CLOB
   CLOB stands for 'Character Large Objects' and which is used to store Character Stream data.
 ---
+## Define 'FileInputStream'?
+- `FileInputStream` is a class from the `java.io` package that opens a file to read **Byte-Stream** data.
 
+### Syntax:
+```java
+FileInputStream fis = new FileInputStream("filePathAndName");
+```
+
+## Define 'FileOutputStream'?
+- `FileOutputStream` is a class from the `java.io` package that creates a new file (0KB) and opens it to write **Byte-Stream** data.
+
+### Syntax:
+```java
+FileOutputStream fos = new FileOutputStream("filePathAndName");
+```
+
+## Define `setBinaryStream()` Method?
+- The `setBinaryStream()` method belongs to `PreparedStatement` and links a stream to a parameter index field.
+- This method requires **parameter index number, location of stream, and length of stream**.
+
+### Syntax:
+```java
+ps.setBinaryStream(3, fis, f.length());
+```
+
+## Define `getBlob()` Method?
+- The `getBlob()` method belongs to `ResultSet` and is used to instantiate a `Blob` interface, linking it to a **Stream column** of `ResultSet`.
+
+### Syntax:
+```java
+Blob b = rs.getBlob(3);
+```
+
+## Define `getBytes()` Method? *(Important)*
+- The `getBytes()` method belongs to `Blob`, and it is used to convert a **stream into a byte array**.
+
+### Syntax:
+```java
+byte by[] = b.getBytes(1, (int)b.length());
+```
+
+## CallableStatement
+- `CallableStatement` is an interface from the `java.sql` package used to execute **Procedures and Functions** on a database product.
+- We use the `prepareCall()` method from the `Connection` interface to create an instance of `CallableStatement`.
+
+### Method Signature of `prepareCall()`:
+```java
+public abstract java.sql.CallableStatement prepareCall(java.lang.String) throws java.sql.SQLException;
+```
+
+### Syntax:
+```java
+CallableStatement cs = con.prepareCall("{call Procedure_name/Function_name}");
+```
+
+## Define 'Function'?
+- A **Function** is a set of queries executed on a database product at once, and after execution, it returns a value.
+- We use the `return` statement to return a value from a function.
+
+### Structure of a Function:
+```sql
+create or replace Function Function_name
+(para_list) return data_type as var data_type;
+begin
+    queries
+    return var;
+end;
+/
+```
+
+## Define 'Procedure'?
+- A **Procedure** is a set of queries executed on a database product at once, and after execution, it does not return any value (**Procedures are Non-Return type**).
+
+### Structure of a Procedure:
+```sql
+create or replace procedure Procedure_name
+(para_list) is
+begin
+    query-1;
+    query-2;
+    ...
+end;
+/
+```
+
+### Types of Procedures
+According to JDBC, Procedures are categorized into three types:
+
+1. **IN-Parameter Procedure**
+   - Takes data from a Java program and sends it to the database product.
+2. **OUT-Parameter Procedure**
+   - Takes data from the database product and sends it to the Java program.
+3. **IN-OUT-Parameter Procedure**
+   - Performs both operations.
+
+## What is the difference between:
+### (i) Function
+- A function in **C-Language** is a part of a program that is executed outside the `main()` function.
+
+### (ii) Member Function
+- In **C++**, functions declared as members of a class are called **Member Functions**.
+- These can be declared inside or outside the class using a class reference.
+
+### (iii) Method
+- In **Java**, functions declared only inside a class are called **Methods**.
+
+
+---
+# JDBC Batch Processing
+
+## Overview
+The process of collecting multiple queries as a batch and executing them on a database at once is known as Batch Processing. It supports only Non-Select queries, also known as Batch Update processing. In real-time applications, Batch Processing is performed using the `Statement` object.
+
+## Important Methods Related to Batch Processing
+
+### 1. addBatch()
+- `addBatch()` is used to add a Non-Select query to a batch.
+- **Method Signature:**
+  ```java
+  public abstract void addBatch(java.lang.String) throws java.sql.SQLException;
+  ```
+- **Syntax:**
+  ```java
+  stm.addBatch("NonSelect-Query");
+  ```
+
+### 2. executeBatch()
+- `executeBatch()` is used to execute all queries from the batch at once.
+- **Method Signature:**
+  ```java
+  public abstract int[] executeBatch() throws java.sql.SQLException;
+  ```
+- **Syntax:**
+  ```java
+  int k[] = stm.executeBatch();
+  ```
+
+### 3. clearBatch()
+- `clearBatch()` deletes all queries from the batch and destroys the batch.
+- **Method Signature:**
+  ```java
+  public abstract void clearBatch() throws java.sql.SQLException;
+  ```
+- **Syntax:**
+  ```java
+  stm.clearBatch();
+  ```
+
+## FAQ
+
+### What is the difference between Batch Processing and Procedures?
+- **Batch Processing** executes only Non-Select queries, whereas **Procedures** can execute both Select and Non-Select queries.
+- In **Batch Processing**, the execution load is on the server, but in **Procedures**, the execution load is on the database.
+
+### Define MetaData?
+Metadata is the data that holds information about other data. JDBC provides the following MetaData components:
+
+#### 1. DatabaseMetaData
+- `DatabaseMetaData` is an interface from the `java.sql` package that holds information about the `Connection` object.
+- **Syntax:**
+  ```java
+  DatabaseMetaData dmd = con.getMetaData();
+  ```
+
+#### 2. ParameterMetaData
+- `ParameterMetaData` is an interface from the `java.sql` package that holds information about the `PreparedStatement` object.
+- **Syntax:**
+  ```java
+  ParameterMetaData pmd = ps.getParameterMetaData();
+  ```
+
+#### 3. ResultSetMetaData
+- `ResultSetMetaData` is an interface from the `java.sql` package that holds information about the `ResultSet` object.
+- **Syntax:**
+  ```java
+  ResultSetMetaData rsmd = rs.getMetaData();
+  ```
+
+---
 
 ## [Construct JDBC Application to display Customer details based on PhoneNo.](https://github.com/lalitpatil891/Code-with-AdvanceJava/tree/main/PracticePrograms/JDBC_app_2/src/test)
 
@@ -1902,6 +2097,69 @@ TotSal: 114300.0
 ### Conclusion
 This project demonstrates how to use JDBC to call a stored function in an Oracle database. The function fetches an employee's total salary based on their ID, and the Java program executes the function using a callable statement.
 
+---
+
+## [JDBC Batch Processing]()
+
+### Overview
+Batch Processing in JDBC is a technique where multiple SQL queries are collected as a batch and executed on the database in one go. This approach enhances performance by reducing the number of database calls.
+
+### Key Concepts
+- **Batch Processing**: Collecting multiple queries and executing them together.
+- **Only Non-Select Queries**: Batch processing supports only non-select queries (INSERT, UPDATE, DELETE), hence it is also called "Batch Update Processing".
+- **Statement Usage**: In real-time applications, batch processing is usually performed using the `Statement` object.
+
+### Important Methods
+1. `addBatch(String sql)`: Adds a SQL statement to the batch.
+2. `executeBatch()`: Executes all the statements in the batch.
+3. `clearBatch()`: Clears the current batch of statements.
+
+### Program Description
+This Java program demonstrates batch processing using JDBC. It:
+1. Inserts a new record into the `Bank72` table.
+2. Deletes a record from the `Customer72` table based on a provided phone number.
+3. Executes both queries as a batch operation.
+
+### Prerequisites
+- Oracle Database installed and running.
+- JDBC Driver for Oracle (ojdbc.jar) included in the classpath.
+
+### Code Explanation
+- Establishes a database connection.
+- Accepts user input for account details.
+- Adds an `INSERT` and a `DELETE` query to the batch.
+- Executes the batch operation.
+- Prints the number of queries executed successfully.
+
+### Execution Steps
+1. Compile the Java file:
+   ```sh
+   javac DBcon15.java
+   ```
+2. Run the program:
+   ```sh
+   java test.DBcon15
+   ```
+
+### Sample Input/Output
+```
+****Insert on Bank72*****
+Enter the AccNo: 123456
+Enter the name: John Doe
+Enter the balance: 5000.75
+Enter the AccType: Savings
+
+**** Delete on Customer72 ****
+Enter the Cust-phoneNo to delete the details: 9876543210
+
+query executed: 1
+query executed: 1
+```
+
+### Notes
+- Ensure that the database schema has the required tables (`Bank72` and `Customer72`).
+- Handle SQL exceptions properly in a real-world scenario.
+- Consider using PreparedStatement to prevent SQL injection.
 
 ---
 
