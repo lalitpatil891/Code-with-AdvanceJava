@@ -1,3 +1,13 @@
+/**Batch Processing in JDBC
+	The process of collecting multiple queries as batch and executing on Database product at-a-time, is known as Batch Processing.
+	Batch Processing Support only NonSelect queries, and which is also known as Batch Update processing.
+	In real time, the Batch Processing is performed using 'Statement'.
+	The following are some important methods related to barch processing:
+        		(a) addBatch()
+        		(b) executeBatch()
+        		(c) clearBatch()
+*/
+
 package test;
 
 import java.util.*;
