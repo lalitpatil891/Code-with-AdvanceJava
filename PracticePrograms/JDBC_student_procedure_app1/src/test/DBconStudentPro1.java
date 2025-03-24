@@ -7,104 +7,129 @@ import java.sql.ParameterMetaData;
 import java.util.Scanner;
 
 public class DBconStudentPro1 {
-	public static void main(String[] args) {
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            
+            // Load Oracle JDBC Driver
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            
+            // Establish Connection
+            Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "lalit");
+            con.setAutoCommit(true); // Ensure auto-commit is enabled
+            
+            // Prepare Callable Statement for Stored Procedure
+            CallableStatement cs4 = con.prepareCall("{call InsertStudentData72(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            ParameterMetaData pmd = cs4.getParameterMetaData();
+            System.out.println("Parameter Count: " + pmd.getParameterCount());
 
-		try (Scanner sc = new Scanner(System.in)) {
+            // Input Data from User
+            System.out.print("Enter Roll No: ");
+            int rollno = sc.nextInt();
+            sc.nextLine(); // Consume newline
 
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "lalit");
+            System.out.print("Enter Name: ");
+            String name = sc.nextLine();
 
-			CallableStatement cs1 = con
-					.prepareCall("{call InsertStudentData72(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-			ParameterMetaData pmd = cs1.getParameterMetaData();
-			System.out.println("Para Count: " + pmd.getParameterCount());
+            System.out.print("Enter Branch: ");
+            String branch = sc.nextLine();
 
-			System.out.print("Enter rollno: ");
-			int rollno = sc.nextInt();
-			sc.nextLine();
-			System.out.print("Enter Name: ");
-			String name = sc.nextLine();
-			System.out.print("Enter Branch: ");
-			String branch = sc.nextLine();
-			System.out.print("Enter House No: ");
-			int hno = sc.nextInt();
-			sc.nextLine();
-			System.out.print("Enter Street name: ");
-			String sname = sc.nextLine();
-			System.out.print("Enter City: ");
-			String city = sc.nextLine();
-			System.out.print("Enter State: ");
-			String state = sc.nextLine();
-			System.out.print("Enter Pincode: ");
-			long pincode = sc.nextLong();
-			sc.nextLine();
-			System.out.print("Enter MailId: ");
-			String mailId = sc.nextLine();
-			System.out.print("Enter PhoneNo: ");
-			long phno = sc.nextLong();
-			System.out.print("Enter Marks(telgu):");
-			int telgu = sc.nextInt();
-			System.out.print("Enter Marks(hindi):");
-			int hindi = sc.nextInt();
-			System.out.print("Enter Marks(english):");
-			int english = sc.nextInt();
-			System.out.print("Enter Marks(math):");
-			int math = sc.nextInt();
-			System.out.print("Enter Marks(science):");
-			int science = sc.nextInt();
-			System.out.print("Enter Marks(social):");
-			int social = sc.nextInt();
-			
-			int totmarks = telgu+hindi+english+math+science+social;
-			double per = totmarks/6;
-			String grade;
-			if(per>90)
-			{
-			    grade = "A";
-			}
-			if(per>80 && per<90)
-			{
-				grade = "B";
-			}
-			if(per>=35 && per<80)
-			{
-				 grade = "C";
-			}
-			else
-			{
-				grade = "F";
-			}
-			
-			cs1.setInt(1, rollno);
-			cs1.setString(2, name);
-			cs1.setString(3, branch);
-			cs1.setInt(4, hno);
-			cs1.setString(5, sname); 
-			cs1.setString(6,city); 
-			cs1.setString(7,state); 
-			cs1.setLong(8,pincode); 
-			cs1.setString(9,mailId); 
-			cs1.setLong(10, phno); 
-			cs1.setInt(11, telgu); 
-			cs1.setInt(12, hindi); 
-			cs1.setInt(13, english); 
-			cs1.setInt(14, math); 
-			cs1.setInt(15, science); 
-			cs1.setInt(16, social); 
-			cs1.setInt(17,totmarks); 
-			cs1.setDouble(18,per); 
-			cs1.setString(19,grade);
-			cs1.execute(); 
-			
-			System.out.println("Employee added Successfully...");
-			con.close();
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            System.out.print("Enter House No: ");
+            int hno = sc.nextInt();
+            sc.nextLine(); // Consume newline
 
+            System.out.print("Enter Street Name: ");
+            String sname = sc.nextLine();
+
+            System.out.print("Enter City: ");
+            String city = sc.nextLine();
+
+            System.out.print("Enter State: ");
+            String state = sc.nextLine();
+
+            System.out.print("Enter Pincode: ");
+            int pincode = sc.nextInt();
+            sc.nextLine(); // Consume newline
+
+            System.out.print("Enter Mail ID: ");
+            String mailId = sc.nextLine();
+
+            System.out.print("Enter Phone No: ");
+            long phno = sc.nextLong();
+
+            System.out.print("Enter Marks (Telugu): ");
+            int telugu = sc.nextInt();
+
+            System.out.print("Enter Marks (Hindi): ");
+            int hindi = sc.nextInt();
+
+            System.out.print("Enter Marks (English): ");
+            int english = sc.nextInt();
+
+            System.out.print("Enter Marks (Math): ");
+            int math = sc.nextInt();
+
+            System.out.print("Enter Marks (Science): ");
+            int science = sc.nextInt();
+
+            System.out.print("Enter Marks (Social Science): ");
+            int social = sc.nextInt();
+
+            // Calculate Total Marks
+            int totmarks = telugu + hindi + english + math + science + social;
+            
+            // Fix Integer Division Issue
+            double per = (double) totmarks / 6.0;
+
+            // Fix Grade Calculation Logic
+            String grade;
+            if (per >= 90) {
+                grade = "A";
+            } else if (per >= 80) {
+                grade = "B";
+            } else if (per >= 35) {
+                grade = "C";
+            } else {
+                grade = "F";
+            }
+
+            // Set Values for Stored Procedure
+            cs4.setInt(1, rollno);
+            cs4.setString(2, name);
+            cs4.setString(3, branch);
+            cs4.setInt(4, hno);
+            cs4.setString(5, sname);
+            cs4.setString(6, city);
+            cs4.setString(7, state);
+            cs4.setInt(8, pincode);
+            cs4.setString(9, mailId);
+            cs4.setLong(10, phno);
+            cs4.setInt(11, telugu);
+            cs4.setInt(12, hindi);
+            cs4.setInt(13, english);
+            cs4.setInt(14, math);
+            cs4.setInt(15, science);
+            cs4.setInt(16, social);
+            cs4.setInt(17, totmarks);
+            cs4.setDouble(18, per);
+            cs4.setString(19, grade);
+
+            boolean success = cs4.execute(); // Executes the stored procedure
+
+            if (!success) { // execute() returns false when no ResultSet is generated
+                System.out.println("Student data inserted successfully!");
+            } else {
+                System.out.println("Insertion might have failed or returned a result set.");
+            }
+
+            // Close Connection
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
+
 
 /**
  * Assignment: DT Tables: StudentData72(rollno,name,branch) -3
@@ -157,3 +182,4 @@ public class DBconStudentPro1 {
  select * from StudentResult72;
  * 
  */
+

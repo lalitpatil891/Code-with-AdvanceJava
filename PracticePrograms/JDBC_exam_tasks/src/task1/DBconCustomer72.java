@@ -77,8 +77,7 @@ public class DBconCustomer72 {
 				break;
 
 			case 2:
-
-//Retrive Data
+				//Retrive Data
 				System.out.print("Enter the Emp-id to retrive Phone No: ");
 				int id = sc.nextInt();
 
