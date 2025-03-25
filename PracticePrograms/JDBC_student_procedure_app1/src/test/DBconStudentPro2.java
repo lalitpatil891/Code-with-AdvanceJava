@@ -96,26 +96,26 @@ public class DBconStudentPro2 {
  * NUMBER, tot OUT NUMBER, pe OUT NUMBER, gr OUT VARCHAR2 ) IS BEGIN -- Fetch
  * Name and Branch SELECT name, branch INTO n, br FROM StudentData72 WHERE
  * rollno = rno;
- * 
+ *
  * -- Fetch Address Details SELECT hno, sname, city, state, pincode INTO hn, sn,
  * cty, ste, pin FROM StudentAddress72 WHERE rollno = rno;
- * 
+ *
  * -- Fetch Contact Details SELECT mid, phno INTO id, ph FROM StudentContact72
  * WHERE rollno = rno;
- * 
+ *
  * -- Fetch Marks Details SELECT telgu, hindi, english, math, science, social
  * INTO t, h, eng, m, sci, so FROM StudentMarks72 WHERE rollno = rno;
- * 
+ *
  * -- Fetch Results SELECT totmarks, per, grade INTO tot, pe, gr FROM
  * StudentResult72 WHERE rollno = rno;
- * 
+ *
  * EXCEPTION WHEN NO_DATA_FOUND THEN DBMS_OUTPUT.PUT_LINE('No data found for
  * roll number: ' || rno); WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Error: ' ||
  * SQLERRM); END; /
- * 
+ *
  * Step-1 : Construct Procedure to retrieve student details based on rollNo
- * 
+ *
  * -> Create or replace procedure retrieveStudentData72 ()
- * 
- * 
+ *
+ *
  */
