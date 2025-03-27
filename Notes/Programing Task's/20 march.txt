@@ -1,0 +1,12 @@
+Program01::Write a jdbc program as follows:
+===========
+Table Name:Employee_Info.
+Table Columns:-empId,empName,empSalary,empAddress,empMailId,empPhNo.
+Note::-Using Batch Processing you have to execute following querries.
+       1.Insert data into Employee Table.
+       2.Update employee salary with the help of eid.
+       3.delete employee who is getting maximum salary.  
+
+Program_02::Write a jdbc program which proves that PreparedStatement is faster as compared to Statement. 
+
+Program_03:Write a JDBC program to read the data from CSV file(excel sheet) and insert data into database table. 

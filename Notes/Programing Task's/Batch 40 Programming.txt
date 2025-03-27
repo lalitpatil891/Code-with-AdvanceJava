@@ -1,0 +1,11 @@
+1)Batch Processing: Implement Data Insertion from CSV
+•	Scenario: You have a CSV file containing employee data (id, name, salary).
+•	Task: Write a Java program that reads the data from the CSV file and inserts it into an employees table in your database using JDBC batch processing.
+
+
+-----------------------
+
+2)2.Create table with name:
+           Customer7(cid,cname,city,mid,phno)
+    Create and execute stored-Procedure to insert details
+     Create and execute Stored-function to retrieve phone number based on cid
