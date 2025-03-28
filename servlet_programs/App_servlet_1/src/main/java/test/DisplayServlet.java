@@ -10,7 +10,7 @@ public class DisplayServlet implements Servlet {
 		@Override
 		public void init(ServletConfig scf) throws ServletException
 		{
-			//NoCode
+			//NoCodeS
 		}
 		
 		@Override
