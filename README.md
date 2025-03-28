@@ -58,8 +58,13 @@ Code-with-AdvanceJava/
 
   - **Batch processing**
      - [JDBC Batch Processing](#jdbc-batch-processing)
-<!--
+
 - Servlets & JSP (Java Server Pages)
+  (6) [Servlet Programming - Implementation Guide](#)
+     - [DisplayServlet]()
+
+
+<!--
 - Spring Framework (Spring Boot, Spring MVC)
 - Hibernate & JPA (Java Persistence API)
 - Web Services (REST & SOAP APIs)
@@ -2160,6 +2165,176 @@ query executed: 1
 - Ensure that the database schema has the required tables (`Bank72` and `Customer72`).
 - Handle SQL exceptions properly in a real-world scenario.
 - Consider using PreparedStatement to prevent SQL injection.
+
+---
+---
+# Servlet Programming - Implementation Guide
+
+## FAQ
+
+### What is a Servlet?
+- A platform-independent Java program executed in a server environment.
+- Defines the functionality of servers.
+- Accepts requests from users via a web browser and provides responses.
+
+### What is a Client?
+- A client refers to a web browser that sends requests to the server.
+
+### What is a Server?
+- A service provider that accepts requests and returns responses using server program support.
+- Service = Accept request + Provide response.
+
+### Types of Servers
+#### 1. Web Servers
+- Provides a Web Container for executing web applications.
+- Primarily handles static content.
+- Accepts HTTP protocol requests.
+- Example: Tomcat.
+
+#### 2. Application Servers
+- Provides both Web Container and EJB Container to handle web and enterprise applications.
+- Handles dynamic content.
+- Accepts requests via HTTP, RMI, and RPC protocols.
+- Examples: WebSphere, WebLogic.
+
+### What is a Web Container?
+- The executable component of web and application servers.
+- Internally divided into:
+  - Servlet Container (Catalina)
+  - JSP Container (Jasper)
+
+## Installing Tomcat Server
+### Steps to Install Tomcat 10:
+1. **Download**: [Tomcat 10](https://tomcat.apache.org/download-10.cgi) from Apache.
+2. **Install**:
+   - Choose **Full Installation**.
+   - Set:
+     - **Server Shutdown Port**: 8089 (User-defined).
+     - **HTTP/1.1 Connector Port**: 8081 or any available port.
+     - **Username**: `V`  
+     - **Password**: `nit`
+   - Select **Java Virtual Machine Path** (JDK 11+).
+   - Tomcat will be installed at `C:\Tomcat 10.1`.
+3. **Start Tomcat**:
+   - Run `startup` or `Tomcat10w` from `C:\Tomcat 10.1\bin`.
+4. **Access Tomcat**:
+   - Open browser and go to `http://localhost:8082`.
+5. **Stop Tomcat**:
+   - Run `shutdown` or `Tomcat10w` from `C:\Tomcat 10.1\bin`.
+
+## Servlet API
+- In Tomcat 10+, `jakarta.servlet` is the Servlet API package (previously `javax.servlet`).
+- The `Servlet` interface includes key methods:
+  1. `init()` - Initializes resources.
+  2. `service()` - Handles requests and responses.
+  3. `destroy()` - Closes resources.
+  4. `getServletInfo()` - Returns servlet information.
+  5. `getServletConfig()` - Returns servlet configuration.
+
+### Servlet Life Cycle
+- **init()** → **service()** → **destroy()** (executed in this order).
+- A servlet program must implement the `Servlet` interface and all its abstract methods.
+
+## Creating & Executing a Web Application in Eclipse
+
+### Step 1: Open Eclipse
+- Select a workspace and click **Launch**.
+
+### Step 2: Create a Dynamic Web Project
+- `File` → `New` → `Project` → `Web` → `Dynamic Web Project` → `Next` → Name the project → `Finish`.
+
+### Step 3: Add `servlet-api.jar` to the Project
+- Right-click on project → `Build Path` → `Configure Build Path` → `Libraries` → `Classpath` → `Add External JARs` → Select `servlet-api.jar` from Tomcat’s `lib` folder → `Open` → `Apply and Close`.
+
+### Step 4: Add Tomcat Server to Eclipse
+- `Servers` → `Click to Create New Server` → Select Tomcat version → `Next` → Browse Tomcat installation directory → `Finish`.
+
+### Step 5: Create an HTML File for User Input
+Create `user.html`:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>User Input Form</title>
+</head>
+<body>
+<form action="dis" method="post">
+UserName: <input type="text" name="uname"><br>
+MailId: <input type="text" name="mid"><br>
+PhoneNo: <input type="text" name="phno"><br>
+<input type="submit" value="Display">
+</form>
+</body>
+</html>
+```
+
+### Step 6: Create `web.xml` (Servlet Mapping File)
+Create `web.xml`:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <welcome-file-list>
+      <welcome-file>user.html</welcome-file>
+  </welcome-file-list>
+</web-app>
+```
+
+### Step 7: Create a Package in `src/main/java`
+- Create a package named `test`.
+
+### Step 8: Create a Servlet Program
+Create `DisplayServlet.java`:
+```java
+package test;
+import java.io.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.*;
+
+@WebServlet("/dis")
+public class DisplayServlet implements Servlet {
+    @Override
+    public void init(ServletConfig scf) throws ServletException {
+        // No Code
+    }
+
+    @Override
+    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+        String uName = req.getParameter("uname");
+        String mId = req.getParameter("mid");
+        long phNo = Long.parseLong(req.getParameter("phno"));
+        PrintWriter pw = res.getWriter();
+        res.setContentType("text/html");
+        pw.println("******User Details*****<br>");
+        pw.println("UserName: " + uName + "<br>");
+        pw.println("MailId: " + mId + "<br>");
+        pw.println("PhoneNo: " + phNo + "<br>");
+    }
+
+    @Override
+    public void destroy() {
+        // No Code
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Servlet displaying User details...";
+    }
+
+    @Override
+    public ServletConfig getServletConfig() {
+        return this.getServletConfig();
+    }
+}
+```
+
+### Step 9: Run the Web Application
+- Right-click the project → `Run As` → `Run on Server` → Select Tomcat → `Finish`.
+- Open browser and go to `http://localhost:8082/App_Servlet_1/`.
+
+---
+**This completes the setup and execution of a Servlet-based web application using Eclipse and Tomcat.**
+
 
 ---
 
