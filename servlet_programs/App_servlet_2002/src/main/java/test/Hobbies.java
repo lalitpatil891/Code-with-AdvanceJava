@@ -17,8 +17,7 @@ public class Hobbies implements Servlet {
 	
 	@Override
 	public void init(ServletConfig arg0) throws ServletException {
-			
-		
+
 	}
 
 	@Override
@@ -34,20 +33,12 @@ public class Hobbies implements Servlet {
 		pw.println("*** Details ****");
 		pw.println("name : "+Name);
 		pw.println("Hobbies: "+Arrays.toString(Hobbies));
-		
-	
-		
-		
-		
-		
-		
 	}
 	
 
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
@@ -56,14 +47,8 @@ public class Hobbies implements Servlet {
 		return null;
 	}
 
-
-	
 	@Override
 	public ServletConfig getServletConfig() {
-		
 		return this.getServletConfig();
 	}
-	
-
-
 }
