@@ -1,14 +1,12 @@
 package test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 
 public class DBConnection {
 
 	public static Connection con = null;
 
-	private DBConnection() {
-	}
+	private DBConnection() {}
 
 	static {
 		try {
@@ -18,5 +16,10 @@ public class DBConnection {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}//end of block
+	
+	public static Connection getCon()
+	{
+		return con;
 	}
 }

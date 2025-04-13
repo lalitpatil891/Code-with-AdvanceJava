@@ -1,13 +1,13 @@
 package test;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
 
 public class AddBookDetailsDAO {
 
 	public int k = 0;
 
-	public int insert(BookBean bb) {
+	public int insert(BookBean bb) 
+	{
 		try {
 			Connection con = DBConnection.getCon(); // Accessing Connection Object
 
