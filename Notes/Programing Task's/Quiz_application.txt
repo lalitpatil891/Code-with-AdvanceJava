@@ -1,0 +1,32 @@
+Task: Create a Quiz App:
+========================
+Objective: Your task is to build a Quiz Application that displays multiple-choice questions, checks answers, and provides feedback to the user.
+
+You will need to implement the following features:
+
+Question Set:
+
+Create 10 Advanced java-related questions with 4 answer options each. Ensure that only one answer is correct per question.
+HTML Structure:
+	- Display each question one at a time.
+	- Provide answer options using radio buttons.
+	- Include a "Submit" button to submit the answer.
+	- Include a "Next" button to move to the next question.
+
+
+Final Score:
+	- Track the number of correct answers the user selects.
+	- Display the final score after the user completes all 10 questions.
+	- The score should display in the format "Your Score: X/10".
+
+
+Steps to Complete the Task:
+
+HTML:
+	- Create the structure for the quiz app. This should include:
+	- A container for the question text.
+	- A form for the radio button answer options.
+	- A "Submit" button to check the selected answer.
+	- A "Next" button to go to the next question.
+
+==================================================================================================================================

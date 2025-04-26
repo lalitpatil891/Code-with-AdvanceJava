@@ -1,0 +1,162 @@
+
+1.ServletContext and ServletConfig Example:
+===========================================
+
+web.xml:
+========
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         version="3.1">
+
+    <!-- ServletContext parameters -->
+    <context-param>
+        <param-name>projectName</param-name>
+        <param-value>LibrarySystem</param-value>
+    </context-param>
+    <context-param>
+        <param-name>supportEmail</param-name>
+        <param-value>support@library.com</param-value>
+    </context-param>
+
+    
+    <!-- ServletConfig declaration -->
+    <servlet>
+        <servlet-name>admin123</servlet-name>
+        <servlet-class>test.AdminServlet</servlet-class>
+        <init-param>
+            <param-name>adminEmail</param-name>
+            <param-value>admin@library.com</param-value>
+        </init-param>
+        <init-param>
+            <param-name>adminPhone</param-name>
+            <param-value>1234567890</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>admin123</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+
+===================================================
+
+package test;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class AdminServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2>ServletConfig Parameters (Servlet-specific)</h2>");
+        ServletConfig config = getServletConfig();
+        Enumeration<String> configParams = config.getInitParameterNames();
+        while (configParams.hasMoreElements()) {
+            String name = configParams.nextElement();
+            String value = config.getInitParameter(name);
+            out.println("<p>" + name + " = " + value + "</p>");
+        }
+
+        out.println("<h2>ServletContext Parameters (Application-wide)</h2>");
+        ServletContext context = getServletContext();
+        Enumeration<String> contextParams = context.getInitParameterNames();
+        while (contextParams.hasMoreElements()) {
+            String name = contextParams.nextElement();
+            String value = context.getInitParameter(name);
+            out.println("<p>" + name + " = " + value + "</p>");
+        }
+
+        out.close();
+    }
+}
+
+OutPut:
+=======
+ServletConfig Parameters (Servlet-specific)
+-------------------------------------------
+adminPhone = 1234567890
+adminEmail = admin@library.com
+
+ServletContext Parameters (Application-wide)
+---------------------------------------------
+supportEmail = support@library.com
+projectName = LibrarySystem
+
+2.Example Application using web.xml at place of @WebServlet :
+or:mapping html to Servlet using web.xml
+=============================================================
+web.xml:
+--------
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <servlet-class>test.WelcomeServlet</servlet-class>
+    </servlet>
+
+<welcome-file-list>
+    <welcome-file>input.html</welcome-file>
+</welcome-file-list>
+
+    <servlet-mapping>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <url-pattern>/welcome</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+
+
+input.html:
+-----------
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Servlet App</title>
+</head>
+<body>
+    <h2>Welcome! Please enter your name</h2>
+    <form action="welcome" method="post">
+        Name: <input type="text" name="username" />
+        <input type="submit" value="Submit" />
+    </form>
+</body>
+</html>
+
+Servlet Program:
+----------------
+package test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class WelcomeServlet extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String name = request.getParameter("username");
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<h2>Hello, " + name + "!</h2>");
+        out.close();
+    }
+}
+

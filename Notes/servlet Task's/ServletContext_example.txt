@@ -1,0 +1,122 @@
+
+Use of getParameterNames():
+===========================
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Parameter Collection Form</title>
+</head>
+<body>
+  <h2>Enter User Details</h2>
+  <form action="collectParams" method="post">
+    Name: <input type="text" name="uname"><br>
+    Email: <input type="email" name="mail"><br>
+    Age: <input type="number" name="age"><br>
+    City: <input type="text" name="city"><br>
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
+----------------------------------------------
+
+package test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/collectParams")
+public class CollectParamServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2>Collected Parameters</h2>");
+        Enumeration<String> parameterNames = request.getParameterNames();
+
+        while (parameterNames.hasMoreElements()) {
+            String paramName = parameterNames.nextElement();
+            System.out.println(paramName);
+            String paramValue = request.getParameter(paramName);
+            out.println("<p><strong>" + paramName + "</strong>: " + paramValue + "</p>");
+        }
+
+        out.close();
+    }
+}
+
+ServletContext:
+================
+web.xml:
+=========
+<web-app xmlns="http://jakarta.ee/xml/ns/jakartaee" version="5.0">
+  
+  <!-- Context Parameters -->
+  <context-param>
+    <param-name>age</param-name>
+    <param-value>25</param-value>
+  </context-param>
+  <context-param>
+    <param-name>location</param-name>
+    <param-value>India</param-value>
+  </context-param>
+  <context-param>
+    <param-name>supportEmail</param-name>
+    <param-value>support@codeverse.com</param-value>
+  </context-param>
+
+  <!-- Servlet Configuration -->
+  <servlet>
+    <servlet-name>ContextParamServlet</servlet-name>
+    <servlet-class>test.ContextParamServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ContextParamServlet</servlet-name>
+    <url-pattern>/showContextParams</url-pattern>
+  </servlet-mapping>
+
+</web-app>
+
+==================================================
+package test;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.*;
+import jakarta.servlet.ServletContext;
+public class ContextParamServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2>Context Initialization Parameters</h2>");
+
+        ServletContext context = getServletContext();
+        Enumeration<String> paramNames = context.getInitParameterNames();
+
+        while (paramNames.hasMoreElements()) {
+            String paramName = paramNames.nextElement();
+            String paramValue=context.getInitParameter(paramName) ;
+            out.println("<p><strong>" + paramName + "</strong>: " + paramValue + "</p>");
+        }
+
+        out.close();
+    }
+}
+

@@ -1,0 +1,395 @@
+
+Date:15/04/25
+--------------
+*UpdateServlet.java:
+====================
+package com.nit.promanagement;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/update")
+public class UpdateServlet extends HttpServlet {
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		double price=Double.parseDouble(request.getParameter("price"));
+		int qty=Integer.parseInt(request.getParameter("qty"));
+		String pCode=request.getParameter("pcode");
+		int k = new EditDao().update(pCode,price,qty);
+		if(k>0)
+		{
+			request.setAttribute("msg", "Product Updated SuccessFully!!!");
+			request.getRequestDispatcher("update.jsp").forward(request, response);
+		}
+		else {
+			request.setAttribute("msg", "Invalid Process.....");
+	    	request.getRequestDispatcher("error.jsp").forward(request, response);
+		}
+	}
+
+}
+
+
+*EditProductServlet.java:
+=========================
+package com.nit.promanagement;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/editproduct")
+public class EditProductServlet extends HttpServlet {
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ProductBean pb = new EditDao().edit(request.getParameter("procode"));
+	    System.out.println(pb);
+		if(pb!=null)
+	    {
+	    	request.setAttribute("bean", pb);
+	    	request.getRequestDispatcher("editProduct.jsp").forward(request, response);
+	    }
+	    else {
+	    	request.setAttribute("msg", "Invalid Process.....");
+	    	request.getRequestDispatcher("error.jsp").forward(request, response);
+	    }
+	}
+
+}
+
+
+*editproduct.jsp:
+=================
+<%@page import="com.nit.promanagement.ProductBean"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+ProductBean pb=(ProductBean) request.getAttribute("bean");
+%>
+<form action="update" method="post">
+Product Code:<input type="hidden" name="pcode" value="<%= pb.getProcode()%>">
+Product Price:<input type="text" name="price" value="<%= pb.getProprice()%>">
+Product Qty:<input type="text" name="qty" value="<%= pb.getProqty()%>">
+<input type="submit" value="UPDATE">
+</form>
+</body>
+</html>
+
+*update.jsp:
+============
+<%@page import="com.nit.promanagement.AdminBean"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+AdminBean ab=(AdminBean) session.getAttribute("abean");
+String msg=(String)request.getAttribute("msg");
+out.println(ab.getFname());
+out.println(msg);
+%>
+<button><a href="">ADD PRODUCT</a></button>
+<button><a href="viewallproducts">VIEW ALL PRODUCT</a></button>
+<button><a href="">LOGOUT</a></button>
+</body>
+</html>
+
+*EditDao.java:
+==============
+package com.nit.promanagement;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+public class EditDao {
+
+	ProductBean pb=null;
+	public ProductBean edit(String pCode)
+	{
+		try {
+			Connection con = DbConection.getcon();
+			PreparedStatement ps=con.prepareStatement
+					("select * from storeproduct where procode=?");
+			ps.setString(1, pCode);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				pb=new ProductBean();
+				pb.setProcode(rs.getString(1));
+				pb.setProname(rs.getString(2));
+				pb.setProprice(rs.getDouble(3));
+				pb.setProqty(rs.getInt(4));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pb;
+	}
+	int k=0;
+	public int update(String pCode,double price,int qty) {
+		
+		try {
+			Connection con = DbConection.getcon();
+			PreparedStatement ps=con.prepareStatement
+					("update storeproduct set proprice=?,proqty=? where procode=?");
+		    ps.setDouble(1, price);
+		    ps.setInt(2, qty);
+		    ps.setString(3, pCode);
+		    k = ps.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return k;
+	}
+}
+
+Date:16/04/25
+--------------
+ViewAllProduct.jsp:
+===================
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.Product_Bean" import="java.util.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Product List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 30px;
+        color: #333;
+    }
+
+    .table-container {
+        width: 80%;
+        margin: 30px auto;
+        overflow-x: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    td {
+        font-size: 15px;
+    }
+
+    .no-data {
+        text-align: center;
+        color: #888;
+        font-size: 18px;
+    }
+    a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    border-radius: 6px;
+    display: inline-block;
+    margin: 10px 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+a:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+.edit-btn {
+    background-color: #2196F3;
+    color: white;
+    padding: 6px 12px;
+    margin-right: 5px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.edit-btn:hover {
+    background-color: #1976D2;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+</style>
+</head>
+<body>
+<%
+List<Product_Bean> listofproduct = (List<Product_Bean>) request.getAttribute("list");
+if (listofproduct != null && !listofproduct.isEmpty()) {
+%>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Code</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Action</th> 
+            </tr>
+        </thead>
+        <tbody>
+        <%
+        for (Product_Bean p1 : listofproduct) {
+        %>
+            <tr>
+                <td><%= p1.getpCode() %></td>
+                <td><%= p1.getpName() %></td>
+                <td><%= p1.getpPrice() %></td>
+                <td><%= p1.getpStock() %></td>
+                <td>
+                <a class="edit-btn" href="EditProductServlet?pCode=<%= p1.getpCode() %>">Edit</a>
+                <a class="delete-btn" href="deleteProductServlet?pCode=<%= p1.getpCode() %>">Delete</a>
+            </td>
+            </tr>
+            
+        <%
+        }
+        %>
+        </tbody>
+    </table>
+<%
+} else {
+    out.println("<p style='text-align:center;'>No products available.</p>");
+}
+%>
+<a href="AddProduct.html">Add Product</a>
+<a href="Logout.html">LogOut</a>
+</body>
+</html>
+
+DeleteSevlet.java:
+==================
+package com;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+
+@WebServlet("/deleteProductServlet")
+public class DeleteProductServlet extends HttpServlet {
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int delete = new AddProductDAO().delete(request.getParameter("pCode"));
+	    if(delete>0)
+	    {
+	    	request.setAttribute("msg", "Product Deleted Successfull!!!");
+	    	request.getRequestDispatcher("delete.jsp").forward(request, response);
+	    }
+	    else {
+	    	
+	    }
+	}
+
+}
+
+DeleteDao.java:
+===============
+public int delete(String code) {
+		int k=0;
+		try {
+			
+			 con = DBConnection.getCon();
+			//Accessing Connection Object
+			PreparedStatement ps = con.prepareStatement("delete from product72 where pcode=?");
+			ps.setInt(1, Integer.parseInt(code));
+		     k = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return k;
+		
+	}
+
+delete.jsp:
+===========
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+String msg=(String)request.getAttribute("msg");
+%>
+<h1 style="text-align: center; color: green;"><%out.println(msg); %></h1>
+<h1 style="text-align: center; color: green;"><button><a href="">ADD PRODUCT</a></button></h1>
+<h1 style="text-align: center; color: green;"><button><a href="ViewAllProduct">VIEW ALL PRODUCT</a></button></h1>
+<h1 style="text-align: center; color: green;"><button><a href="">LOGOUT</a></button></h1>
+</body>
+</html>
+
